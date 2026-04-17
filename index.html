@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Buddy - Your Personal Food Translator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Grain overlay -->
+    <div class="grain"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <span class="logo-icon">MB</span>
+                <span class="logo-text">Menu Buddy</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#screens">App Preview</a>
+                <a href="#tech">Under the Hood</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">iOS 26 &middot; Liquid Glass &middot; On-Device AI</div>
+            <h1>Finally eat out<br><span class="hero-accent">without the anxiety.</span></h1>
+            <p class="hero-sub">Menu Buddy is a personal food translator for picky eaters. Upload a menu, get instant recommendations tailored to what you actually like — with warnings about hidden ingredients the menu doesn't mention.</p>
+            <div class="hero-cta">
+                <a href="#screens" class="btn btn-primary">See the App</a>
+                <a href="#features" class="btn btn-ghost">Explore Features</a>
+            </div>
+        </div>
+        <div class="hero-phone">
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="screen screen-hero">
+                    <div class="screen-status-bar">
+                        <span>9:41</span>
+                        <span class="status-icons">
+                            <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="1" width="3" height="11" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1"/></svg>
+                        </span>
+                    </div>
+                    <div class="screen-greeting">Good evening, Niels</div>
+                    <div class="screen-prompt">What are we eating tonight?</div>
+                    <div class="screen-actions">
+                        <div class="screen-action-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            <span>Scan Menu</span>
+                        </div>
+                        <div class="screen-action-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Paste Text</span>
+                        </div>
+                    </div>
+                    <div class="screen-recent">
+                        <div class="screen-recent-title">Recent</div>
+                        <div class="screen-recent-item">
+                            <span class="recent-dot green"></span>
+                            Trattoria Milano
+                        </div>
+                        <div class="screen-recent-item">
+                            <span class="recent-dot yellow"></span>
+                            Sushi Tanaka
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two User Types -->
+    <section class="users-section">
+        <div class="section-label">Built for everyone</div>
+        <h2>Two kinds of picky.<br><span class="text-accent">One app that gets both.</span></h2>
+        <div class="users-grid">
+            <div class="user-card">
+                <div class="user-card-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                </div>
+                <h3>The Preferences Eater</h3>
+                <p class="user-quote">"No fatty meats, love spicy food, not big on cream sauces."</p>
+                <p>You'll eat most things. You just know what you like. Menu Buddy recommends the best dishes and flags the ones that won't work — with clear reasons why.</p>
+                <div class="user-tags">
+                    <span class="tag">Recommendations</span>
+                    <span class="tag">Warnings</span>
+                    <span class="tag">Suggestions</span>
+                </div>
+            </div>
+            <div class="user-card">
+                <div class="user-card-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                </div>
+                <h3>The Safe Foods Eater</h3>
+                <p class="user-quote">"On vacation I always ask for plain rice or chicken nuggets."</p>
+                <p>You're not exploring — you're surviving. Menu Buddy finds what's close enough to what you actually eat, without judgment. No pressure to try new things.</p>
+                <div class="user-tags">
+                    <span class="tag">Safe matches</span>
+                    <span class="tag">No judgment</span>
+                    <span class="tag">Modifications</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features-section">
+        <div class="section-label">Core Features</div>
+        <h2>Everything between you<br><span class="text-accent">and a good meal.</span></h2>
+
+        <div class="features-grid">
+            <div class="feature-card feature-large">
+                <div class="feature-number">01</div>
+                <h3>Smart Food Profile</h3>
+                <p>No giant forms. An AI conversation builds your profile naturally — asking about textures, flavor combos, cooking methods, and intensity levels. "I don't love onions" vs "raw onion and I'm sending it back" are very different things.</p>
+                <div class="feature-detail-list">
+                    <div class="feature-detail">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Ingredient likes & dislikes with intensity
+                    </div>
+                    <div class="feature-detail">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Texture, temperature & cooking preferences
+                    </div>
+                    <div class="feature-detail">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Allergy vs preference distinction
+                    </div>
+                    <div class="feature-detail">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Learns from your feedback over time
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">02</div>
+                <h3>Menu Scanner</h3>
+                <p>Snap a photo of any menu or paste text. Vision framework extracts the text, AI parses the dishes, and matches everything against your profile in seconds.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">03</div>
+                <h3>Hidden Ingredient Warnings</h3>
+                <p>The killer feature. "Caesar salad" doesn't say anchovies — but they're in the dressing. Menu Buddy knows cuisine-specific secrets and flags what menus don't tell you.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">04</div>
+                <h3>Translate & Order</h3>
+                <p>In Chile and need pizza with no cheese? Get the exact phrase in natural Spanish — culturally aware, not Google Translate robotic. Show the waiter your phone.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">05</div>
+                <h3>Transparent Reasoning</h3>
+                <p>Never just "safe" or "avoid." Every recommendation shows its reasoning. "This looks good, but note that Thai curries often contain shrimp paste even when not listed."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Screens -->
+    <section id="screens" class="screens-section">
+        <div class="section-label">App Preview</div>
+        <h2>A quick look<br><span class="text-accent">at every screen.</span></h2>
+
+        <div class="screens-carousel">
+            <!-- Screen 1: Onboarding -->
+            <div class="screen-showcase">
+                <div class="iphone-frame small">
+                    <div class="dynamic-island"></div>
+                    <div class="screen screen-onboarding">
+                        <div class="screen-status-bar">
+                            <span>9:41</span>
+                            <span class="status-icons">
+                                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="1" width="3" height="11" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1"/></svg>
+                            </span>
+                        </div>
+                        <div class="onboard-title">Let's build your food profile</div>
+                        <div class="chat-bubble bot">How do you feel about spicy food?</div>
+                        <div class="chat-bubble user">I love it! The spicier the better honestly</div>
+                        <div class="chat-bubble bot">Nice! What about creamy or rich sauces? Things like alfredo, b&eacute;chamel, curry cream...</div>
+                        <div class="chat-bubble user">Not a huge fan. Too heavy for me</div>
+                        <div class="chat-typing">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="chat-input-mock">Tell me more...</div>
+                    </div>
+                </div>
+                <div class="screen-label">
+                    <h4>Conversational Onboarding</h4>
+                    <p>No forms. Just a natural chat that builds your profile as you talk about food.</p>
+                </div>
+            </div>
+
+            <!-- Screen 2: Menu Scan Results -->
+            <div class="screen-showcase">
+                <div class="iphone-frame small">
+                    <div class="dynamic-island"></div>
+                    <div class="screen screen-results">
+                        <div class="screen-status-bar">
+                            <span>9:41</span>
+                            <span class="status-icons">
+                                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="1" width="3" height="11" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1"/></svg>
+                            </span>
+                        </div>
+                        <div class="results-header">Trattoria Milano</div>
+                        <div class="results-subtitle">12 dishes analyzed</div>
+
+                        <div class="result-item green">
+                            <div class="result-dot"></div>
+                            <div class="result-info">
+                                <div class="result-name">Arrabbiata Penne</div>
+                                <div class="result-reason">Spicy tomato base, no cream. Right up your alley.</div>
+                            </div>
+                        </div>
+                        <div class="result-item green">
+                            <div class="result-dot"></div>
+                            <div class="result-info">
+                                <div class="result-name">Grilled Branzino</div>
+                                <div class="result-reason">Light, grilled fish. Lemon &amp; herbs.</div>
+                            </div>
+                        </div>
+                        <div class="result-item yellow">
+                            <div class="result-dot"></div>
+                            <div class="result-info">
+                                <div class="result-name">Caesar Salad</div>
+                                <div class="result-reason">Likely has anchovies &amp; raw egg in dressing</div>
+                            </div>
+                            <div class="result-badge">Hidden ingredients</div>
+                        </div>
+                        <div class="result-item red">
+                            <div class="result-dot"></div>
+                            <div class="result-info">
+                                <div class="result-name">Carbonara</div>
+                                <div class="result-reason">Heavy cream &amp; egg sauce. Rich &amp; fatty.</div>
+                            </div>
+                        </div>
+                        <div class="result-item red">
+                            <div class="result-dot"></div>
+                            <div class="result-info">
+                                <div class="result-name">Tiramisu</div>
+                                <div class="result-reason">Heavy mascarpone cream dessert</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-label">
+                    <h4>Menu Analysis</h4>
+                    <p>Green, yellow, red. Every dish rated with clear reasoning and hidden ingredient warnings.</p>
+                </div>
+            </div>
+
+            <!-- Screen 3: Translation -->
+            <div class="screen-showcase">
+                <div class="iphone-frame small">
+                    <div class="dynamic-island"></div>
+                    <div class="screen screen-translate">
+                        <div class="screen-status-bar">
+                            <span>9:41</span>
+                            <span class="status-icons">
+                                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="1" width="3" height="11" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1"/></svg>
+                            </span>
+                        </div>
+                        <div class="translate-header">
+                            <div class="translate-flag">CL</div>
+                            <div>
+                                <div class="translate-country">Chile</div>
+                                <div class="translate-lang">Spanish</div>
+                            </div>
+                        </div>
+                        <div class="translate-request">Pizza with no cheese, extra tomato sauce</div>
+                        <div class="translate-divider"></div>
+                        <div class="translate-result">"Una pizza sin queso, con salsa de tomate extra, por favor"</div>
+                        <div class="translate-tip">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <span>In Chile, food modification requests are common and generally well-received. Staff won't mind at all.</span>
+                        </div>
+                        <div class="translate-actions">
+                            <div class="translate-btn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copy
+                            </div>
+                            <div class="translate-btn primary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="4"/><path d="M8 10h8M8 14h4"/></svg>
+                                Show Waiter
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-label">
+                    <h4>Translation Mode</h4>
+                    <p>Natural phrases in any language. Culturally aware tips. Show-the-waiter card.</p>
+                </div>
+            </div>
+
+            <!-- Screen 4: Profile -->
+            <div class="screen-showcase">
+                <div class="iphone-frame small">
+                    <div class="dynamic-island"></div>
+                    <div class="screen screen-profile">
+                        <div class="screen-status-bar">
+                            <span>9:41</span>
+                            <span class="status-icons">
+                                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="1" width="3" height="11" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1"/></svg>
+                            </span>
+                        </div>
+                        <div class="profile-title">Your Food Profile</div>
+                        <div class="profile-section">
+                            <div class="profile-section-title">Loves</div>
+                            <div class="profile-tags">
+                                <span class="ptag love">Spicy food</span>
+                                <span class="ptag love">Grilled meats</span>
+                                <span class="ptag love">Fresh herbs</span>
+                                <span class="ptag love">Crunchy textures</span>
+                            </div>
+                        </div>
+                        <div class="profile-section">
+                            <div class="profile-section-title">Avoids</div>
+                            <div class="profile-tags">
+                                <span class="ptag avoid">Cream sauces</span>
+                                <span class="ptag avoid">Fatty meats</span>
+                                <span class="ptag avoid">Raw onion</span>
+                            </div>
+                        </div>
+                        <div class="profile-section">
+                            <div class="profile-section-title">Allergies</div>
+                            <div class="profile-tags">
+                                <span class="ptag allergy">Shellfish</span>
+                            </div>
+                        </div>
+                        <div class="profile-section">
+                            <div class="profile-section-title">Curious About</div>
+                            <div class="profile-tags">
+                                <span class="ptag curious">Ethiopian food</span>
+                                <span class="ptag curious">Kimchi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-label">
+                    <h4>Food Profile</h4>
+                    <p>Likes, dislikes, allergies, and things you're curious to try. All synced via iCloud.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-section">
+        <div class="section-label">How It Works</div>
+        <h2>From menu to meal<br><span class="text-accent">in four steps.</span></h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h4>Build Your Profile</h4>
+                    <p>Have a quick chat with the AI about what you like, hate, and are allergic to. Takes about 2 minutes. Syncs to iCloud.</p>
+                </div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h4>Scan or Paste a Menu</h4>
+                    <p>Point your camera at a physical menu or paste text from a website. Vision framework extracts everything.</p>
+                </div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h4>Get Instant Analysis</h4>
+                    <p>Every dish rated green, yellow, or red. Hidden ingredients flagged. Modification suggestions included.</p>
+                </div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h4>Order With Confidence</h4>
+                    <p>Abroad? Generate a natural-sounding phrase in the local language. Show the waiter your phone if needed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="tech-section">
+        <div class="section-label">Under the Hood</div>
+        <h2>Two AIs are<br><span class="text-accent">better than one.</span></h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-card-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    <h4>On-Device</h4>
+                </div>
+                <div class="tech-name">Apple Foundation Models</div>
+                <p>3B parameter LLM running locally on Apple Silicon. Free, offline, private. Handles preference matching, basic parsing, and translation.</p>
+                <div class="tech-tags">
+                    <span>Offline capable</span>
+                    <span>Zero cost</span>
+                    <span>Private</span>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    <h4>Cloud</h4>
+                </div>
+                <div class="tech-name">OpenAI API</div>
+                <p>Deep food knowledge, cuisine-specific reasoning, hidden ingredient inference. The brain behind "this Caesar salad probably has anchovies."</p>
+                <div class="tech-tags">
+                    <span>Deep reasoning</span>
+                    <span>Food expertise</span>
+                    <span>Cultural context</span>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <h4>Vision</h4>
+                </div>
+                <div class="tech-name">Apple Vision Framework</div>
+                <p>OCR for menu photos. Extracts text from any angle, any lighting, any language. Feeds directly into the AI pipeline.</p>
+                <div class="tech-tags">
+                    <span>Camera input</span>
+                    <span>Multi-language OCR</span>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <h4>Sync</h4>
+                </div>
+                <div class="tech-name">CloudKit (iCloud)</div>
+                <p>Your food profile syncs seamlessly across all your devices. Structured data, free at personal scale, zero backend needed.</p>
+                <div class="tech-tags">
+                    <span>Cross-device</span>
+                    <span>No backend</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Philosophy -->
+    <section class="philosophy-section">
+        <div class="section-label">Design Philosophy</div>
+        <div class="philosophy-grid">
+            <div class="philosophy-item">
+                <div class="philosophy-icon">&rarr;</div>
+                <h4>Show the reasoning</h4>
+                <p>Never just "safe" or "avoid." Every recommendation explains why, so you make the final call.</p>
+            </div>
+            <div class="philosophy-item">
+                <div class="philosophy-icon">&rarr;</div>
+                <h4>Never claim certainty</h4>
+                <p>"This likely contains X because Y" — not "this is definitely safe." It's someone else's kitchen.</p>
+            </div>
+            <div class="philosophy-item">
+                <div class="philosophy-icon">&rarr;</div>
+                <h4>No judgment</h4>
+                <p>Whether you eat everything or only 12 foods, the app treats you the same. No "you should try..." pressure.</p>
+            </div>
+            <div class="philosophy-item">
+                <div class="philosophy-icon">&rarr;</div>
+                <h4>Err on the side of flagging</h4>
+                <p>A false positive beats a false negative. Better to warn about something that's fine than miss something that isn't.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="roadmap-section">
+        <div class="section-label">Roadmap</div>
+        <h2>What's coming<br><span class="text-accent">after v1.</span></h2>
+        <div class="roadmap-grid">
+            <div class="roadmap-item shipped">
+                <div class="roadmap-status">v1</div>
+                <h4>The Essentials</h4>
+                <ul>
+                    <li>Conversational food profile</li>
+                    <li>Menu photo scanning</li>
+                    <li>AI-powered analysis</li>
+                    <li>Hidden ingredient warnings</li>
+                    <li>Translation mode</li>
+                    <li>iCloud sync</li>
+                </ul>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-status">v2</div>
+                <h4>Smarter</h4>
+                <ul>
+                    <li>Auto-pull menus from websites</li>
+                    <li>Profile learning from feedback</li>
+                    <li>Apple Watch quick-glance</li>
+                    <li>Share profile with family</li>
+                </ul>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-status">v3</div>
+                <h4>Social</h4>
+                <ul>
+                    <li>Group dining mode</li>
+                    <li>Restaurant recommendations</li>
+                    <li>"Order for someone else" mode</li>
+                    <li>Community restaurant ratings</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <span class="logo-icon">MB</span>
+                <span class="logo-text">Menu Buddy</span>
+            </div>
+            <p class="footer-tagline">A personal project by someone who just wants to eat in peace.</p>
+            <div class="footer-tech">SwiftUI &middot; iOS 26 &middot; Liquid Glass &middot; Foundation Models &middot; OpenAI &middot; CloudKit</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
