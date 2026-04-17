@@ -75,9 +75,9 @@ p { color: var(--text-muted); max-width: 55ch; }
 a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
 a:hover { opacity: 0.8; }
 
-/* Section Layout */
+/* Section Layout — mobile-first */
 section {
-    padding: 120px 40px;
+    padding: 60px 16px;
     max-width: var(--max-width);
     margin: 0 auto;
 }
@@ -103,7 +103,7 @@ section > h2 { margin-bottom: 64px; }
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 16px 40px;
+    padding: 14px 16px;
     background: rgba(12, 11, 9, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -142,7 +142,7 @@ section > h2 { margin-bottom: 64px; }
 }
 
 .nav-links {
-    display: flex;
+    display: none;
     gap: 32px;
 }
 
@@ -159,13 +159,15 @@ section > h2 { margin-bottom: 64px; }
    Hero
    ============================================ */
 .hero {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     min-height: 100vh;
-    padding-top: 140px;
+    padding-top: 100px;
+    text-align: center;
 }
+
+.hero-content { max-width: 680px; margin: 0 auto; }
 
 .hero-badge {
     display: inline-block;
@@ -184,7 +186,7 @@ section > h2 { margin-bottom: 64px; }
 .hero-sub {
     font-size: 1.15rem;
     max-width: 48ch;
-    margin-top: 24px;
+    margin: 24px auto 0;
     line-height: 1.7;
 }
 
@@ -192,6 +194,8 @@ section > h2 { margin-bottom: 64px; }
     display: flex;
     gap: 16px;
     margin-top: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .btn {
@@ -351,55 +355,78 @@ section > h2 { margin-bottom: 64px; }
 .recent-dot.yellow { background: var(--yellow); }
 
 /* ============================================
-   Users Section
+   Eater Spectrum Section
    ============================================ */
-.users-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+.spectrum-intro {
+    font-size: 1.05rem;
+    max-width: 60ch;
+    margin-bottom: 56px;
+    line-height: 1.75;
 }
 
-.user-card {
+.spectrum-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.spectrum-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 40px;
+    padding: 28px;
     transition: border-color 0.3s, background 0.3s;
+    position: relative;
 }
 
-.user-card:hover {
+.spectrum-card:hover {
     border-color: var(--border-light);
     background: var(--bg-card-hover);
 }
 
-.user-card-icon {
+.spectrum-card-num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.8rem;
     color: var(--accent);
-    margin-bottom: 20px;
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 12px;
 }
 
-.user-card h3 { margin-bottom: 12px; }
+.spectrum-card h3 { margin-bottom: 10px; font-size: 1.2rem; }
 
-.user-quote {
+.spectrum-quote {
     font-family: var(--font-display);
     font-style: italic;
     color: var(--text);
-    font-size: 1rem;
-    margin-bottom: 16px;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    max-width: none;
+    line-height: 1.5;
+}
+
+.spectrum-card > p:last-child {
+    font-size: 0.88rem;
+    line-height: 1.65;
     max-width: none;
 }
 
-.user-card > p { font-size: 0.9rem; margin-bottom: 20px; }
+.spectrum-card > p:last-child em { color: var(--text); font-style: normal; font-weight: 600; }
 
-.user-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-
-.tag {
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 5px 12px;
-    border-radius: 100px;
+.spectrum-footnote {
+    margin-top: 40px;
+    padding: 24px 28px;
     background: var(--accent-soft);
-    color: var(--accent);
     border: 1px solid rgba(232, 148, 76, 0.12);
+    border-radius: var(--radius-lg);
+}
+
+.spectrum-footnote p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    max-width: none;
+    line-height: 1.7;
 }
 
 /* ============================================
@@ -931,7 +958,7 @@ section > h2 { margin-bottom: 64px; }
    ============================================ */
 .footer {
     border-top: 1px solid var(--border);
-    padding: 64px 40px;
+    padding: 48px 16px;
 }
 
 .footer-inner {
@@ -979,44 +1006,32 @@ section > h2 { margin-bottom: 64px; }
 }
 
 /* ============================================
-   Responsive
+   Responsive — mobile-first (scale up)
    ============================================ */
-@media (max-width: 1100px) {
-    .screens-carousel {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 48px 32px;
-    }
-}
 
-@media (max-width: 900px) {
+/* Tablet and up */
+@media (min-width: 600px) {
     section { padding: 80px 24px; }
+    .nav { padding: 16px 24px; }
+    .footer { padding: 56px 24px; }
 
-    .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 48px;
-        padding-top: 120px;
-    }
-
-    .hero-sub { margin: 24px auto 0; }
-    .hero-cta { justify-content: center; }
-    .hero-phone { order: -1; }
-
-    .users-grid { grid-template-columns: 1fr; }
-    .features-grid { grid-template-columns: 1fr; }
-    .feature-detail-list { grid-template-columns: 1fr; }
-    .tech-grid { grid-template-columns: 1fr; }
-    .philosophy-grid { grid-template-columns: 1fr; gap: 32px; }
-    .roadmap-grid { grid-template-columns: 1fr; }
-    .screens-carousel { grid-template-columns: 1fr; gap: 48px; }
-
-    .nav-links { display: none; }
+    .spectrum-grid { grid-template-columns: 1fr 1fr; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .tech-grid { grid-template-columns: 1fr 1fr; }
+    .philosophy-grid { grid-template-columns: 1fr 1fr; }
+    .roadmap-grid { grid-template-columns: repeat(3, 1fr); }
+    .screens-carousel { grid-template-columns: repeat(2, 1fr); gap: 48px 32px; }
+    .feature-detail-list { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 500px) {
-    section { padding: 60px 16px; }
-    .nav { padding: 14px 16px; }
-    .footer { padding: 48px 16px; }
-    h1 { font-size: 2.4rem; }
-    h2 { font-size: 1.8rem; }
+/* Desktop and up */
+@media (min-width: 960px) {
+    section { padding: 120px 40px; }
+    .nav { padding: 16px 40px; }
+    .footer { padding: 64px 40px; }
+
+    .nav-links { display: flex; }
+    .spectrum-grid { grid-template-columns: repeat(3, 1fr); }
+    .screens-carousel { grid-template-columns: repeat(4, 1fr); gap: 40px; }
+    .philosophy-grid { gap: 48px 64px; }
 }

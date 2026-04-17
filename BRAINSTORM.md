@@ -10,22 +10,62 @@ Menu Buddy is a **personal food translator** — not just language translation, 
 
 ## Target Users
 
-### Two Distinct User Types
+### The Eater Spectrum
 
-**The "Preferences" Eater**
+There's no such thing as "two types of picky eaters." It's a spectrum, and most people are a blend of several profiles that shift depending on context — you might be adventurous at home but a survival eater on vacation, or fine with textures but deeply sensitive to unexpected flavors. The app needs to understand this fluidity, not slot people into boxes.
+
+**The Preferences Eater**
 - "No fatty meats, I like spicy food, not big on cream sauces"
 - Will eat most things, just has a clear set of likes/dislikes
 - Wants recommendations and warnings
 - Explores menus but wants guidance
 
-**The "Safe Foods" Eater**
+**The Safe Foods Eater**
 - "Plain rice, chicken nuggets, maybe plain pasta"
 - Much more restricted diet
 - Doesn't want recommendations — wants to know what on this menu is close enough to what they actually eat
 - Not exploring, surviving
 - Often feels awkward at group dinners
 
-The app must handle both without making the safe-foods person feel judged or the preferences person feel limited.
+**The Texture Person**
+- Doesn't care much about flavors/ingredients, but is deeply sensitive to *how* food feels
+- Can't do slimy (okra, oysters), mushy (overcooked vegetables, beans), or gristly/chewy meat
+- Often can't fully articulate what they don't like until it's in their mouth
+- This is really common and menus are terrible at communicating texture
+
+**The Sensory Overload Eater**
+- Doesn't want too much happening on one plate
+- Hates unexpected flavor combos — sweet where savory should be, a surprise crunch, conflicting spices
+- Wants to know *exactly* what they're getting, no surprises
+- Often overlaps with neurodivergent eating patterns (ARFID, autism-related food sensitivity)
+- The "I just want plain things" person — but it's not about being unadventurous, it's about sensory regulation
+
+**The Cultural Comfort Eater**
+- Grew up with a specific cuisine, genuinely uncomfortable outside it
+- Not about being "picky" in the traditional sense — they just have a very defined palate shaped by upbringing
+- At a Thai restaurant they don't know what anything is, and "spicy" means something totally different in their food culture vs Thai spicy
+- The translation feature is huge for this person, but even domestically
+
+**The Recovering/Expanding Eater**
+- Someone who *was* extremely picky and is actively trying to branch out
+- Wants the app to gently push boundaries — "this is 80% things you like, with one ingredient you've never tried"
+- The "curious about" category in our profile is built for this person
+- Needs encouragement but not pressure
+
+**The Social Anxiety Eater**
+- Not actually that picky, but terrified of ordering wrong, asking for modifications, or being "that person" at the table
+- Wants to know before they sit down: "is there something safe here I can order without having to ask questions"
+- The translation feature helps even in their own language — having the exact phrasing for a modification builds confidence
+
+### Profile Dimensions (not categories)
+
+Rather than slotting users into a type, the profile system captures *dimensions*:
+- **Adventurousness** — exploring vs survival mode (and this can shift by context)
+- **Sensitivity type** — flavor vs texture vs sensory overload
+- **Social comfort** — fine asking for changes vs would rather skip the meal
+- **Why they're picky** — preference vs sensory vs cultural familiarity
+
+The onboarding conversation surfaces all of this naturally without ever labeling anyone. The AI just asks the right follow-up questions. People move along these dimensions constantly — confident at their local spot, survival mode abroad.
 
 ---
 

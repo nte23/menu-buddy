@@ -8,7 +8,7 @@
     // Scroll-triggered fade-in animations
     function initScrollAnimations() {
         const selectors = [
-            ".user-card",
+            ".spectrum-card",
             ".feature-card",
             ".screen-showcase",
             ".step",
@@ -69,24 +69,6 @@
         });
     }
 
-    // Parallax on hero phone
-    function initHeroParallax() {
-        const phone = document.querySelector(".hero-phone");
-        if (!phone || window.matchMedia("(max-width: 900px)").matches) return;
-
-        let ticking = false;
-        window.addEventListener("scroll", () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    const y = window.scrollY;
-                    phone.style.transform = `translateY(${y * 0.08}px)`;
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-    }
-
     // Active nav link on scroll
     function initActiveNav() {
         const links = document.querySelectorAll(".nav-links a");
@@ -124,7 +106,6 @@
     document.addEventListener("DOMContentLoaded", () => {
         initScrollAnimations();
         initNavScroll();
-        initHeroParallax();
         initActiveNav();
     });
 })();
