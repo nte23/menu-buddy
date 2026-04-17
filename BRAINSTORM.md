@@ -205,6 +205,52 @@ For traveling abroad:
 
 ---
 
+## Detailed Design Decisions (from Q&A)
+
+### Menu Results UI
+- **Short summary + expand**: Each dish shows the rating dot and a one-liner by default. Tap to expand into full reasoning, hidden ingredient details, and modification suggestions.
+- Big menus (100+ items): Deferred for later. Most users won't scan 10 pages — they already know half the menu is off the table at first glance.
+
+### Onboarding Strategy
+- **Hybrid: quick start + import + ongoing refinement**
+- Quick onboarding: slightly longer than originally planned, covers broad strokes (cuisines, major dislikes, allergies, textures, key flavor preferences)
+- Optional: provide a prompt the user can give ChatGPT to summarize their food preferences from past chats, then paste that summary into Menu Buddy for an instant head start (side feature, not the main flow)
+- Ability to "answer more when you have the time" — the onboarding isn't a one-time thing, you can always go back and add more detail
+- Real profile depth comes from actual use and follow-ups over time
+
+### Conditional Preferences (the cheese problem)
+- **Two-tier system:**
+  - Hard rules for dealbreakers (allergies, absolute no-gos) — stored as rigid rules
+  - AI reasoning for nuanced stuff — "I don't like cheese but melted on a burger is fine, Parmesan on pesto pasta is okay." Feed the AI full preference history and let it reason contextually. "This dish has Parmesan on pasta — you've liked that before."
+- Basically: rules for safety, AI for taste
+
+### Post-Meal Follow-ups
+- **Push notifications**, customizable timing in settings
+- User can log detailed feedback: "I chose the chicken salad and liked it but the olives ruined the lettuce. I thought I was okay with olives because I loved that olive bread, but on a salad? No."
+- AI dissects follow-up feedback and updates the food profile accordingly — extracts nuanced learnings (olives: okay in bread, not in salads) and stores them
+
+### Full History Tracking
+- Track restaurants scanned, dishes analyzed, what was ordered, user ratings/feedback
+- Essential for the AI to learn and improve recommendations over time
+- History feeds back into the profile system
+
+### Translation: Full Cultural Briefing
+- Not just the phrase — include cultural context, alternative suggestions if modifications are frowned upon, and pronunciation guide
+- Example: in Japan, it's culturally difficult to request modifications. The app should suggest alternative dishes rather than modification phrases.
+
+### Hidden Ingredient Warnings
+- **User-configurable sensitivity threshold** via settings slider
+- Paranoid mode: flag everything, even low-confidence warnings
+- Relaxed mode: only flag high-confidence hidden ingredients
+- Different users have different tolerance for noise vs safety
+
+### Discovery Mode
+- **Toggle in settings: "Feeling adventurous?"**
+- When on: actively suggests stretch dishes ("this is 90% safe, with one ingredient you haven't tried — curious?")
+- When off: pure protection mode, only flags safe vs unsafe
+
+---
+
 ## Key Design Decisions
 
 - **No vegan/vegetarian focus** — but the app will be accidentally great at it since the underlying logic is the same
@@ -212,12 +258,16 @@ For traveling abroad:
 - **Personal project first** — built for 1-2 users initially, but architected for App Store release
 - **No shortcuts in architecture** — build it right from the start for future users
 - **Allergy vs preference distinction** — different severity levels, different UI treatment
+- **Two-tier preference system** — hard rules + contextual AI reasoning
+- **Profile builds over time** — lightweight start, depth from actual use
+- **Configurable sensitivity** — users control how noisy warnings are
 
 ---
 
 ## Open Questions
 
-- How specific should preferences get? "I hate cilantro" is easy. "I don't like when things are unexpectedly sweet" is harder but more useful
-- Should there be a community layer eventually? (Share profiles, rate restaurant "picky-friendliness")
 - Monetization if it goes public? Freemium with limited scans? Subscription for unlimited?
 - How to handle menus in non-Latin scripts? OCR + translation pipeline
+- Should there be a community layer eventually? (Share profiles, rate restaurant "picky-friendliness")
+- How to handle conflicting feedback? ("loved olives in bread, hated on salad" — how many data points before the AI is confident about a context rule?)
+- Offline mode: how much can the on-device model handle when there's no connectivity? Can it do a basic scan with just hard rules?
