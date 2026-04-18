@@ -86,17 +86,32 @@ These are the first items every user sees. They are the most diagnostic, cultura
 
 ### Response Options Per Item
 
-Each item gets one of five responses:
+Each item gets one of six responses:
 
 | Response | Label | What it tells us |
 |---|---|---|
 | Love | "Love this" | Strong positive — actively seek out |
 | Fine | "It's fine" | Neutral/acceptable — won't complain, won't order |
-| No | "Not for me" | Reject — would not choose, might send back |
+| Meh | "Not really" | Mild dislike — would prefer to avoid but won't send back |
+| No | "Hard no" | Strong aversion — would send back, might gag, ruins a dish |
 | Depends | "It depends" | Context-dependent — triggers a follow-up |
 | Unknown | "Never tried" | No data — flagged for future |
 
+The split between "Not really" and "Hard no" is critical. Research shows picky eaters have a wide range of aversion intensity — from mild distaste to disgust/gag responses. A mild dislike means "warn me but I can deal." A hard no means "if this is in the dish at all, even hidden, flag it red." This maps directly to the recommendation confidence thresholds.
+
 **"It depends" is the most valuable response.** It reveals context dependency, which is the defining characteristic of nuanced picky eaters (the cheese problem). When a user taps "depends," the system queues a targeted follow-up for Round 2.
+
+### Inline Comment Button
+
+Every item card has a small comment/note icon. Tapping it opens a quick text field: *"Want to add a note?"*
+
+Most users won't use it. But for users who need to say "not raw but sauce is fine" or "only when it's smoked" — this is essential. These notes are the highest-value input in the system. They go directly into the narrative profile and often contain the exact contextual rules that no amount of card-tapping could capture.
+
+Examples of real inline comments:
+- Tomato: "Sauce is great, but a whole cooked tomato split open? No way"
+- Cheese: "Melted on things is fine. Cold or strong cheese is terrible"
+- Salmon: "Smoked on toast = perfect. Thick cooked fillet = too fatty"
+- Horseradish: "Only with smoked salmon. Hate it in any other context"
 
 ---
 
@@ -105,54 +120,66 @@ Each item gets one of five responses:
 Generated based on Round 1 responses. The system identifies:
 
 1. **"Depends" responses** — ask about the same food in different contexts
-2. **Dimension gaps** — if Round 1 didn't cover a dimension well, add items for it
-3. **Contradiction tests** — if responses seem inconsistent, probe the boundary
+2. **Inline comments** — parse user notes for context rules and verify understanding
+3. **Dimension gaps** — if Round 1 didn't cover a dimension well, add items for it
+4. **Contradiction tests** — if responses seem inconsistent, probe the boundary
 
-### Follow-Up Templates
+### Transition UX
 
-**For "depends" on raw tomato:**
-> Show three context cards:
-> - Raw tomato slices on a sandwich
-> - Tomato in a fresh salsa/bruschetta
-> - Cooked tomato sauce on pasta
->
-> "You said raw tomato 'depends.' Help me understand — which of these are okay?"
+Round 2 must not feel like a surprise. After Round 1 completes, the AI frames the follow-ups:
 
-**For "depends" on sushi:**
-> - California roll (cooked crab, avocado)
-> - Salmon nigiri (raw fish, rice)
-> - Sashimi (just raw fish, nothing else)
->
-> "Is it the raw fish specifically, or something else about sushi?"
+> "Good start. I noticed some foods where the answer might depend on how they're prepared. Let me check a few things — this will make my recommendations much more accurate."
 
-**For "no" to mushrooms but "love" to soy sauce:**
-> AI inference: "You seem to dislike umami from fungi but enjoy it from fermented sources. Does that sound right?"
-> This is the AI proposing a pattern. User confirms or corrects.
+This sets the expectation that the same ingredient will appear in different forms. Without this framing, users will think the system is broken ("I already said no to tomatoes, why are you asking again?").
 
-**For "no" to blue cheese but no data on other cheese:**
-> - Mozzarella on pizza
-> - Cheddar on a burger
-> - Parmesan on pasta
-> - Cream cheese on a bagel
->
-> "Blue cheese is a no — what about these?"
+### Follow-Up Types
+
+**Type 1: Ingredient-State Probes (for "depends" or inline comments)**
+
+For the top context-dependent ingredients, always probe multiple states when triggered:
+
+| Ingredient | States to probe |
+|---|---|
+| Tomato | Raw sliced, in fresh salsa, as cooked sauce, whole roasted |
+| Onion | Raw, caramelized/fried, as powder/seasoning, in a cooked dish (hidden) |
+| Cheese | Melted on things, cold/sliced, strong (blue/goat), as parmesan/seasoning |
+| Egg | Scrambled/hard, runny yolk, raw in dressing (Caesar, mayo), baked into things |
+| Salmon/fish | Raw (sushi), smoked, pan-fried thick, flaked in a dish |
+| Pepper | Bell pepper (raw), bell pepper (cooked), black pepper, chili pepper |
+
+Format: Show 3-4 context cards for the ingredient. Each card is a specific preparation. User reacts to each independently.
+
+**Type 2: AI Inference Verification**
+
+> "You seem to dislike umami from fungi but enjoy it from fermented sources. Does that sound right?"
+
+The AI proposes a pattern. User confirms or corrects.
+
+**Type 3: Gap Fillers**
+
+If Round 1 didn't cover a hidden dimension well, add targeted items.
 
 ### Adaptive Selection Algorithm
 
 ```
 for each "depends" response in Round 1:
-    generate 2-3 context variations of that item
-    add to Round 2 queue
+    generate 3-4 ingredient-state variations
+    add to Round 2 queue (high priority)
+
+for each inline comment in Round 1:
+    parse for context rules
+    generate verification cards
+    add to Round 2 queue (high priority)
 
 for each hidden dimension with < 2 data points:
     select highest-signal item for that dimension
-    add to Round 2 queue
+    add to Round 2 queue (medium priority)
 
 for each apparent contradiction:
     generate a boundary-testing item
-    add to Round 2 queue
+    add to Round 2 queue (medium priority)
 
-sort Round 2 queue by information gain (descending)
+sort Round 2 queue by priority, then information gain
 present top 8-12 items
 ```
 
@@ -183,6 +210,158 @@ GAPS:
 ```
 
 The user taps to confirm, correct, or add nuance to each inference. Corrections are weighted heavily — they override statistical predictions.
+
+---
+
+## Free-Text Chat Input
+
+A persistent text input lives at the bottom of the timeline, always available. It serves three purposes:
+
+**1. Power user fast-track:** Someone who already knows their preferences can dump a wall of text ("I love smoked salmon on toast but can't stand thick cooked salmon fillets, the fatty texture is unbearable. Horseradish is great but ONLY with salmon, hate it on schnitzel..."). The AI parses this and builds the narrative profile directly.
+
+**2. Nuance that cards can't capture:** "I'm okay with olives in olive bread but on a salad the taste gets into everything and ruins it." No card system can elicit this. Free text can.
+
+**3. Corrections and additions over time:** After onboarding, the user can always come back and type new things. "Had sashimi for the first time last night and actually loved it."
+
+The cards are the guided path. The chat is the escape hatch. Both feed into the same narrative profile.
+
+---
+
+## Storage Architecture
+
+### The Prompt Size Problem
+
+If we store structured data for every food in every context, the profile becomes enormous and hard for the AI to reason over. A user who has detailed opinions about 50+ foods with contextual rules would generate thousands of structured entries.
+
+**Solution: Store preferences as natural language, not database rows.**
+
+Humans store food preferences as stories and associations, not tables. The AI should too.
+
+### Three-Layer Storage
+
+```
+Layer 1: Raw Signals (structured, for the profiling engine)
+├── Round 1 responses: {mushrooms: "hard_no", tomato: "depends", ...}
+├── Round 2 responses: {tomato_raw: "love", tomato_cooked_whole: "hard_no", ...}
+├── Inline comments: {tomato: "sauce great, whole cooked mushy = no"}
+├── Chat messages: full conversation text
+└── Post-meal feedback: raw user input
+
+Layer 2: Narrative Profile (AI-generated, human-editable)
+├── Natural language document summarizing everything
+├── Organized by ingredient/theme, not by abstract category
+├── Regenerated by AI after each significant new signal
+├── User can read and edit directly ("My Taste Profile")
+└── THIS is what gets sent in the menu analysis prompt
+
+Layer 3: Hard Rules (structured, user-confirmed, never overridden)
+├── Allergies: [shellfish, peanuts]
+├── Absolute dealbreakers: [raw onion, liver]
+└── These ALWAYS flag red, regardless of AI reasoning
+```
+
+### Example Narrative Profile
+
+```markdown
+## Tomatoes
+Loves raw tomatoes and tomato sauce. Pizza with extra sauce is great.
+But hates whole cooked tomatoes — the mushy, split-open texture is a
+dealbreaker. The line is: processed/sauced = yes, intact and soft = no.
+
+## Salmon & Fish
+Very preparation-dependent. Smoked salmon on toast is a favorite.
+Small amounts in sushi are fine. But a thick cooked salmon fillet is
+too fatty — the fattiness is the issue, not the fish itself. Other
+white fish when grilled is generally okay.
+
+## Cheese
+Complicated. Melted cheese on burgers and pizza is fine. Parmesan on
+pasta with green pesto is good. But cold cheese, strong cheese (blue,
+goat), and cheese as a main ingredient (cheese plate, mac and cheese)
+are all hard nos. The line: cheese as seasoning/melted = okay, cheese
+as a feature = no.
+
+## Horseradish
+Loves it specifically with smoked salmon on toast. Hates it in every
+other context — Bavarian restaurants, on schnitzel, in cocktail sauce.
+This is a pure pairing preference, not an ingredient preference.
+
+## Textures
+Strong aversion to mushy/slimy. Overcooked vegetables, raw oysters,
+soft overripe banana are all hard nos. Loves crunchy and crispy.
+Chewy is fine in familiar contexts (good steak) but not unfamiliar
+ones (squid, mochi).
+
+## Heat / Spice
+Likes moderate spice. Thai curry is good. Indian is good if not
+extreme. But sharp/horseradish-type spice is only okay in very
+specific pairings (see Horseradish above).
+```
+
+This profile is roughly 1,500 tokens. Even a very detailed profile with 30+ entries stays under 4,000 tokens. Combined with system instructions (~500 tokens) and a menu (~1-3k tokens), the total prompt for menu analysis is well within model context limits.
+
+### Why Narrative Over Structured
+
+- LLMs reason over prose better than over database rows
+- Natural language captures nuance that structure can't ("the fattiness is the issue, not the fish itself")
+- Users can read and edit their own profile — it's not a black box
+- The AI can write new entries in the same format after learning new things
+- Scales to arbitrary complexity without schema changes
+
+### Profile Regeneration
+
+After significant new input (Round 2 completion, post-meal feedback, free-text additions), the AI regenerates the narrative profile:
+
+1. Read current narrative profile
+2. Read new raw signals (Layer 1)
+3. Generate updated profile, preserving existing entries and adding/modifying based on new data
+4. Show diff to user: "I updated your profile — here's what changed"
+5. User approves or edits
+
+---
+
+## Safe Food Core
+
+After profiling, the system explicitly derives a **safe food list** — foods and preparations the user reliably enjoys. This is the most important output for stressful dining situations.
+
+### Why This Matters
+
+When a user is at an unfamiliar restaurant, anxious, or in a group, they don't want recommendations. They want a guaranteed safe option. The safe food core answers: "What on this menu is closest to something I know I like?"
+
+### How It's Derived
+
+```
+safe_foods = items where:
+    - Response was "Love" in Round 1 or Round 2
+    - OR item matches a confirmed positive in the narrative profile
+    - AND no conflicting signals exist
+    - AND confidence is high (multiple confirming data points)
+```
+
+### Example Safe Food Core
+
+```
+YOUR SAFE FOODS:
+- Grilled chicken (any preparation without heavy sauce)
+- Plain pasta with tomato sauce
+- Rice dishes (not fried with too many mixed ingredients)
+- Smoked salmon (on toast, in a sandwich)
+- Pizza (standard toppings, no strong cheese)
+- French fries
+- Simple grilled fish (white fish, lemon/herbs)
+- Fresh bread
+
+SAFE CUISINES:
+- Italian (stick to simple pasta, pizza, grilled proteins)
+- Japanese (sushi with familiar fish, avoid raw shellfish)
+- American/comfort food (most items safe, watch for heavy cream sauces)
+
+SAFE FALLBACK ORDER:
+"If nothing else works, look for grilled chicken with a side salad
+(dressing on the side) or a simple pasta with tomato sauce."
+```
+
+This gets highlighted prominently in the app and is the first thing shown when analyzing a menu in "protect me" mode.
 
 ---
 
@@ -284,11 +463,36 @@ Items where our prediction is least confident have the highest information gain.
 ### Response Weighting
 
 Not all responses are equal:
-- **"Depends"** = highest value (reveals context rules)
-- **"Love" or "No"** = high value (clear signal)
-- **"Fine"** = moderate value (tells us it's not a factor)
-- **"Never tried"** = low value (no preference data, but flags novelty tolerance)
-- **Corrections to AI inferences** = highest weight of all (direct user override)
+- **Corrections to AI inferences** = highest weight (direct user override, always wins)
+- **Inline comments / free-text notes** = very high (natural language context rules)
+- **"Depends"** = high (reveals context rules, triggers follow-ups)
+- **"Love" or "Hard no"** = high (clear signal with intensity)
+- **"Not really"** = moderate (mild dislike — warn but don't block)
+- **"Fine"** = moderate (tells us it's not a factor)
+- **Post-meal feedback** = high (real-world validation of predictions)
+- **"Never tried"** = low (no preference data, but flags novelty tolerance)
+
+### Aversion Intensity
+
+The split between "Not really" and "Hard no" drives recommendation behavior:
+
+| Aversion Level | Menu Analysis Behavior |
+|---|---|
+| "Not really" (mild) | Yellow flag: "This dish contains X, which you're not a fan of. You could ask for it without." |
+| "Hard no" (strong) | Red flag: "This dish contains X. Avoid." Also triggers hidden ingredient warnings for this item. |
+
+Strong aversions also expand the hidden ingredient search. If someone has a hard no on mushrooms, the AI should warn about truffle oil, mushroom-based broths, and duxelles even when not listed on the menu. For mild dislikes, hidden ingredient warnings are less aggressive.
+
+### Dish Decomposition (separate from profiling)
+
+The preference model feeds into menu analysis, but dish decomposition is handled by the AI at analysis time, not pre-computed. When analyzing a menu, the AI prompt includes:
+
+1. System instructions for how to decompose dishes
+2. Hard rules (Layer 3) — always check first
+3. Narrative profile (Layer 2) — the main reasoning context
+4. The menu text
+
+The AI's food knowledge handles ingredient inference, hidden ingredients, cuisine-specific conventions, and preparation methods. We don't need to build a food ontology — the LLM already has one. What we need is a well-crafted system prompt that instructs the AI how to use the profile for reasoning.
 
 ### Cultural Adaptation
 
@@ -307,6 +511,14 @@ Example: For a user from East Asia, replace "blue cheese" with "stinky tofu" (sa
 
 2. **Should we show photos or illustrations?** Photos are more visceral (which is good for picky eaters — they respond to visual appearance) but harder to source/license. Illustrations are more controllable. Could A/B test.
 
-3. **How to handle "it depends" at scale?** If a user taps "depends" on 10 out of 15 items, the follow-up round becomes huge. May need to prioritize which "depends" items to drill into first.
+3. **How to handle "it depends" at scale?** If a user taps "depends" on 10 out of 15 items, the follow-up round becomes huge. Solution: prioritize by predictive value — a "depends" on tomato (high context dependency, predicts many dishes) is more valuable than "depends" on coconut (niche). Cap Round 2 at 12 items max, queue the rest for later.
 
 4. **Validation:** Before launch, we should run this item set through a small pilot (20-30 real picky eaters) and measure whether Round 1 responses actually predict Round 2 responses. If prediction accuracy is below 60%, the item selection needs tuning.
+
+5. **Narrative profile regeneration frequency:** How often should the AI rewrite the profile? After every input? Only after significant new data? Too frequent = expensive API calls. Too infrequent = stale profile. Starting point: regenerate after Round 2 completion, after each post-meal feedback, and on user request.
+
+6. **Profile editing UX:** Users should be able to read and edit their narrative profile directly. But editing prose is harder than editing structured data. Should there be a "structured view" alongside the narrative? Or just let users add notes that the AI incorporates on next regeneration?
+
+7. **Cultural adaptation validation:** The gateway 15 items are Western-biased. Before expanding to non-Western users, need equivalent diagnostic items validated for East Asian, South Asian, Middle Eastern, Latin American palates. This is a research project in itself.
+
+8. **Contradiction resolution:** When signals conflict (loves sushi but rejects runny egg), the AI reasons contextually using the narrative profile. But if contradictions persist after multiple corrections, the system should surface them: "I'm getting mixed signals about soft/liquid textures — can you help me understand the line?" Rather than silently picking one interpretation.
