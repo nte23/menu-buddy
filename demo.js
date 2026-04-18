@@ -7,22 +7,41 @@
     // ==========================================
     // Gateway Items (from methodology doc)
     // ==========================================
+    // SVG icons for each food item
+    const ICONS = {
+        mushrooms: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4C7 4 3 7.5 3 11c0 1 .5 2 1 2h16c.5 0 1-1 1-2 0-3.5-4-7-9-7z"/><path d="M10 13v6c0 .5.5 1 1 1h2c.5 0 1-.5 1-1v-6"/></svg>',
+        raw_tomato: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="13" r="8"/><path d="M9 5c1.5 1 4.5 1 6 0"/><path d="M12 5V3"/><path d="M12 9v8"/><path d="M8 13h8"/></svg>',
+        blue_cheese: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8l8-4 8 4v8l-8 4-8-4V8z"/><circle cx="10" cy="12" r="1.5"/><circle cx="15" cy="10" r="1"/><circle cx="13" cy="15" r="1.2"/></svg>',
+        cilantro: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20V10"/><path d="M12 10c-3-3-7-2-7 1s4 4 7 1"/><path d="M12 10c3-3 7-2 7 1s-4 4-7 1"/><path d="M12 6c-2-2-5-1-5 1s3 3 5 1"/><path d="M12 6c2-2 5-1 5 1s-3 3-5 1"/></svg>',
+        avocado: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-4 0-7 4-7 9s3 9 7 9 7-4 7-9-3-9-7-9z"/><circle cx="12" cy="14" r="3.5"/></svg>',
+        sushi: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="14" rx="8" ry="5"/><path d="M4 14V10c0-2.8 3.6-5 8-5s8 2.2 8 5v4"/><path d="M8 11.5c1.5-.8 3.5-.8 5-.2s3 .4 3-.5"/></svg>',
+        olives: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="9" cy="13" rx="4.5" ry="6"/><ellipse cx="9" cy="11" rx="1.5" ry="2"/><path d="M13 7c2-3 5-4 7-3"/><ellipse cx="16" cy="13" rx="3.5" ry="5" transform="rotate(15 16 13)"/></svg>',
+        spicy_curry: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12c0 5 3 9 7 9s7-4 7-9"/><path d="M5 12h14"/><path d="M8 12V9c0-1 1-2 2-2"/><path d="M16 12V8"/><path d="M12 12V7"/><path d="M9 3c0 1.5 1 2.5 1 4"/><path d="M12 2c0 2 1 3 1 5"/><path d="M15 3c0 1.5 1 2.5 1 4"/></svg>',
+        runny_egg: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-2 0-4 3-5.5 6.5S4 16 4 17.5C4 20 7.5 21 12 21s8-1 8-3.5c0-1.5-1-4.5-2.5-8S14 3 12 3z"/><circle cx="12" cy="14" r="3"/></svg>',
+        liver: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8c0-2 2-4 5-4 2 0 3.5.5 4.5 1.5S18 8 18 10c0 3-1 5.5-3 7s-4.5 3-7 3c-1.5 0-2.5-1-2.5-3 0-1.5.5-3 1.5-4.5S6 10 6 8z"/><path d="M10 10c1 .5 2.5.5 4 0"/></svg>',
+        pickles: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h6"/><circle cx="10" cy="10" r="0.5" fill="currentColor"/><circle cx="14" cy="14" r="0.5" fill="currentColor"/></svg>',
+        coconut: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9z"/><path d="M12 3c-1 3-1 6 0 9s3 6 5 8"/><path d="M12 3c1 3 1 6 0 9s-3 6-5 8"/><circle cx="10" cy="9" r="1"/><circle cx="14" cy="9" r="1"/><circle cx="12" cy="12" r="1"/></svg>',
+        honey_glaze: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v4"/><path d="M10 7h4"/><path d="M8 10c0-1.5 1.8-3 4-3s4 1.5 4 3"/><path d="M6 10c0 2 1 3.5 2 5l-1 3c0 1 1 2 2.5 2h5c1.5 0 2.5-1 2.5-2l-1-3c1-1.5 2-3 2-5H6z"/><path d="M8 14h8"/></svg>',
+        mayo: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 4h8l1 4H7l1-4z"/><path d="M7 8v10c0 1.5 1 3 2.5 3h5c1.5 0 2.5-1.5 2.5-3V8"/><path d="M10 12c.5 1 1.5 1 2.5.5s2-.5 2.5.5"/></svg>',
+        ripe_banana: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8c1-2 4-4 7-4 4 0 7 2 8 6 1 4-1 8-5 10-2 1-4 1-5 0"/><path d="M5 8c2 1 5 4 6 8s0 6-1 7"/></svg>',
+    };
+
     const GATEWAY_ITEMS = [
-        { id: "mushrooms", name: "Mushrooms", desc: "Button, portobello, shiitake, truffle...", emoji: "\ud83c\udf44" },
-        { id: "raw_tomato", name: "Raw Tomato", desc: "Sliced on a sandwich, in a salad", emoji: "\ud83c\udf45" },
-        { id: "blue_cheese", name: "Blue Cheese", desc: "Roquefort, gorgonzola, stilton", emoji: "\ud83e\uddc0" },
-        { id: "cilantro", name: "Cilantro", desc: "Fresh herb, common in Mexican & Asian food", emoji: "\ud83c\udf3f" },
-        { id: "avocado", name: "Avocado", desc: "Guacamole, on toast, in sushi", emoji: "\ud83e\udd51" },
-        { id: "sushi", name: "Sushi (raw fish)", desc: "Nigiri, sashimi, rolls with raw fish", emoji: "\ud83c\udf63" },
-        { id: "olives", name: "Olives", desc: "Green, black, kalamata, on pizza", emoji: "\ud83e\uded2" },
-        { id: "spicy_curry", name: "Spicy Thai Curry", desc: "Green/red curry, coconut milk, chili", emoji: "\ud83c\udf5b" },
-        { id: "runny_egg", name: "Runny Egg Yolk", desc: "Sunny-side up, soft poached, dippy eggs", emoji: "\ud83c\udf73" },
-        { id: "liver", name: "Liver / Pat\u00e9", desc: "Organ meats, foie gras, liverwurst", emoji: "\ud83c\udf56" },
-        { id: "pickles", name: "Pickles / Sauerkraut", desc: "Fermented, vinegary, tangy", emoji: "\ud83e\udd52" },
-        { id: "coconut", name: "Coconut", desc: "Shredded, in curries, coconut milk, desserts", emoji: "\ud83e\udd65" },
-        { id: "honey_glaze", name: "Honey-Glazed Meat", desc: "Sweet + savory combo, teriyaki-style", emoji: "\ud83c\udf6f" },
-        { id: "mayo", name: "Mayo / Aioli", desc: "On sandwiches, as dipping sauce, in dressings", emoji: "\ud83e\ude94" },
-        { id: "ripe_banana", name: "Ripe Banana", desc: "Soft, sweet, spotty brown — the mushy kind", emoji: "\ud83c\udf4c" },
+        { id: "mushrooms", name: "Mushrooms", desc: "Button, portobello, shiitake, truffle..." },
+        { id: "raw_tomato", name: "Raw Tomato", desc: "Sliced on a sandwich, in a salad" },
+        { id: "blue_cheese", name: "Blue Cheese", desc: "Roquefort, gorgonzola, stilton" },
+        { id: "cilantro", name: "Cilantro", desc: "Fresh herb, common in Mexican & Asian food" },
+        { id: "avocado", name: "Avocado", desc: "Guacamole, on toast, in sushi" },
+        { id: "sushi", name: "Sushi (raw fish)", desc: "Nigiri, sashimi, rolls with raw fish" },
+        { id: "olives", name: "Olives", desc: "Green, black, kalamata, on pizza" },
+        { id: "spicy_curry", name: "Spicy Thai Curry", desc: "Green/red curry, coconut milk, chili" },
+        { id: "runny_egg", name: "Runny Egg Yolk", desc: "Sunny-side up, soft poached, dippy eggs" },
+        { id: "liver", name: "Liver / Pat\u00e9", desc: "Organ meats, foie gras, liverwurst" },
+        { id: "pickles", name: "Pickles / Sauerkraut", desc: "Fermented, vinegary, tangy" },
+        { id: "coconut", name: "Coconut", desc: "Shredded, in curries, coconut milk, desserts" },
+        { id: "honey_glaze", name: "Honey-Glazed Meat", desc: "Sweet + savory combo, teriyaki-style" },
+        { id: "mayo", name: "Mayo / Aioli", desc: "On sandwiches, as dipping sauce, in dressings" },
+        { id: "ripe_banana", name: "Ripe Banana", desc: "Soft, sweet, spotty brown \u2014 the mushy kind" },
     ];
 
     const REACTIONS = [
@@ -170,7 +189,7 @@
             el.innerHTML = `
                 <div class="food-item-header">
                     <div class="food-item-info">
-                        <div class="food-item-emoji">${item.emoji}</div>
+                        <div class="food-item-icon">${ICONS[item.id]}</div>
                         <div>
                             <div class="food-item-name">${item.name}</div>
                             <div class="food-item-desc">${item.desc}</div>

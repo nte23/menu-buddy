@@ -121,7 +121,7 @@ body {
 }
 
 .food-item-info { display: flex; align-items: center; gap: 12px; }
-.food-item-emoji { font-size: 1.5rem; width: 36px; text-align: center; }
+.food-item-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
 .food-item-name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
 .food-item-desc { font-size: 0.72rem; color: var(--text-dim); margin-top: 1px; }
 
